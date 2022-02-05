@@ -1,0 +1,96 @@
+//- mixin without arguments
+mixin skill-list
+    ol
+        li PHP
+        li SQL
+        li MYSQL
+//- mixin with arguments
+mixin certificates(arg, arg2)
+    ol
+        li PHP
+        li SQL
+        li MYSQL
+        li #{arg}
+        - if(arg2)
+            li #{arg2}
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(
+            name='viewport',
+            content='width=device-width, initial-scale=1.0'
+        )
+        title Hello From Pug
+        include styles.pug
+    body
+        p(class='main-paragraph') Ahmed Saber
+        div: a.nav-btns Click Me
+        div(class='container', id='myDiv')
+            a#link.active.nav-btns Me Too
+            ul
+                li Ahmed
+                li Saber
+                li Fathy
+            // HTML Comment
+            //
+                Multipleline
+                Comment
+            //- Pug Comment
+            p
+                | I love 
+                b PugJS
+                |  and 
+                b Sass
+            p My name is 
+                i(
+                    style={
+                        'background-color': 'black',
+                        'color': 'white',
+                        'padding': '4px'
+                    }
+                ) Ahmed Saber
+            |
+            |
+            .
+                This is a text
+        .section
+            p Hi User
+            //- variables, you can type all of them in vars.pug then include it anywhere
+            - var className = 'my-paragraph-in-section'
+            p(class=className)
+            p(class=className + '-second')
+            div= 'This <strong>tag</strong> will NOT be displayed'
+            div!= 'This <strong>tag</strong> will be displayed'
+            ul
+                //- inside loop
+                - for(var i=0; i<10; i++)
+                    li item #{i}
+                //- outside loop
+                - for(var i=0; i<20; i++)
+                li item #{i}
+                //- each in array
+                each val, index in ['Ahmed', 'Ali', 'Ashraf', 'Mohammed', 'Saber']
+                    p= 'Student number ' + (index+1) + ' is ' + val
+                //- each in declared array
+                - var skills = ['HTML', 'CSS', 'JS']
+                each val, index in skills
+                    p= 'Skill number ' + (index+1) + ' is ' + val
+                //- each in empty array
+                - var projects = []
+                each val, index in projects
+                    p= 'Project number ' + (index+1) + ' is ' + val
+                else
+                    p There is no projects
+                +skill-list
+                +certificates('Pug', 'Sass')
+                +certificates()
+        .footer
+            a(
+                href='#',
+                class='footer-p',
+                id='last-p',
+                style='color: teal'
+            ) Developed by Ahmed Saber
+
+    script(src='app.js')
